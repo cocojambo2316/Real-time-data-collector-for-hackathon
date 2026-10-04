@@ -1,0 +1,51 @@
+.env
+
+.env.*
+!.env.example
+
+# Python bytecode & cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+.datavenv/
+.venv/
+__pycache__/
+*.pyc
+.env
+
+# Virtual Environments
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE & Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs & temporary files
+*.log
+logs/
+
+# Database / Local storage
+*.sqlite3
+*.db
+pgdata/
+docker-data/
+
+
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+# Packaging & builds
+dist/
+build/
+*.egg-info/

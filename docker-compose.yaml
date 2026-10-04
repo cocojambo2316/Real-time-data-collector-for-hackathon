@@ -1,0 +1,41 @@
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: parking_postgres
+    restart: always
+    environment:
+      POSTGRES_DB: ${DB_NAME:-parking_db}
+      POSTGRES_USER: ${DB_USER:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  collector:
+    build: .
+    container_name: parking_collector
+    restart: always
+    depends_on:
+      - db
+    env_file:
+      - .env
+    environment:
+      - DB_HOST=db  # Внутри сети Docker имя сервиса базы — это db
+
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: parking_pgadmin
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    depends_on:
+      - db
+
+volumes:
+  pgdata:
