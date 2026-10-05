@@ -22,7 +22,7 @@ services:
     env_file:
       - .env
     environment:
-      - DB_HOST=db  # Внутри сети Docker имя сервиса базы — это db
+      - DB_HOST=db
 
 
   pgadmin:
